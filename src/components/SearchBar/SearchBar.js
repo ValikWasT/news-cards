@@ -15,8 +15,7 @@ export const SearchBarSection = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const formText = evt.target.form.elements.text.value;
-    dispatch(fetchCards(formText));
+    dispatch(fetchCards(filter));
   };
 
   const handleSearch = evt => {

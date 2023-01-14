@@ -10,7 +10,9 @@ export const fetchCards = createAsyncThunk(
   'cards/fetchAll',
   async (searchKey, thunkAPI) => {
     try {
-      const response = await axios.get(`?q=${searchKey}&apiKey=${API_KEY}`);
+      const response = await axios.get(
+        `?q=${searchKey}&apiKey=${API_KEY}&sortBy=relevancy`
+      );
       Notiflix.Notify.success('News load seccess');
       return response.data;
     } catch (e) {

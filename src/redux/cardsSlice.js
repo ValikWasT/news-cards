@@ -13,6 +13,7 @@ const handleRejected = (state, action) => {
 const cardsSlice = createSlice({
   name: 'cards',
   initialState: {
+    totalResults: 0,
     items: [],
     isLoading: false,
     error: null,
@@ -22,7 +23,8 @@ const cardsSlice = createSlice({
     [fetchCards.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.items = action.payload;
+      state.items = action.payload.articles;
+      state.totalResults = action.payload.totalResults;
     },
     [fetchCards.rejected]: handleRejected,
   },
