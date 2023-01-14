@@ -9,3 +9,4 @@ export const SearchBarInput = styled.input`
 `;
 export const SearchForm = styled.form``;
 export const SearchButton = styled.button``;
+export const SearchBarTitle = styled.p``;

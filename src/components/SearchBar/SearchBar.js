@@ -6,6 +6,7 @@ import {
   SearchBarInput,
   SearchForm,
   SearchButton,
+  SearchBarTitle,
 } from './SearchBarStyled';
 import { fetchCards } from '../../redux/operations';
 export const SearchBarSection = () => {
@@ -14,8 +15,8 @@ export const SearchBarSection = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const form = evt.target;
-    dispatch(fetchCards(form.elements.text.value));
+    const formText = evt.target.form.elements.text.value;
+    dispatch(fetchCards(formText));
   };
 
   const handleSearch = evt => {
@@ -24,6 +25,7 @@ export const SearchBarSection = () => {
 
   return (
     <SearchBarContainer>
+      <SearchBarTitle>Filter by keywords</SearchBarTitle>
       <SearchForm onSubmit={handleSubmit}>
         <SearchBarInput
           type="text"
