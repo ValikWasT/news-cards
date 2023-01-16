@@ -5,7 +5,7 @@ import {
   selectNewsCards,
   selectTotalResuts,
 } from 'redux/selectors';
-import { CardsList, CardListTitle } from './CardsListStyled';
+import { CardsList, CardListTitle, CardTitleBorder } from './CardsListStyled';
 import { Card } from 'components/CardItem/CardItem';
 import '../../index.css';
 
@@ -24,6 +24,7 @@ export const CardsListSection = () => {
         url: card.url,
         imageURL: card.urlToImage,
         content: card.content,
+        publishedAt: card.publishedAt,
         relevancy: 0,
       };
       const arrayWordsOfTitle = newCard.title.split(' ');
@@ -64,7 +65,8 @@ export const CardsListSection = () => {
 
   return (
     <>
-      <CardListTitle>Total results: {totalResults}</CardListTitle>
+      <CardListTitle>Results: {totalResults}</CardListTitle>
+      <CardTitleBorder />
       <CardsList>
         {sortedCards.length > 0 &&
           sortedCards.map(card => <Card key={nanoid()} card={card} />)}

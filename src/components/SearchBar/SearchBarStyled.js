@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 export const SearchBarContainer = styled.div`
   width: 600px;
-  margin-left: 75px;
-  margin-top: 50px;
 `;
 export const SearchBarInput = styled.input`
+  padding: 0;
   border: 0;
   width: 100%;
 `;
