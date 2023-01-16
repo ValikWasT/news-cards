@@ -1,3 +1,4 @@
+import { Article } from 'components/ArticleSection/ArticleSection';
 export const ArticlePage = () => {
-  return <div>Blablabla article</div>;
+  return <Article />;
 };

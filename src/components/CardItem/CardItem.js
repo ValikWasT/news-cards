@@ -26,7 +26,9 @@ export const Card = ({
         <CardTime>{localDate.toString()}</CardTime>
         <CardTitle dangerouslySetInnerHTML={{ __html: title }} />
         <CardText dangerouslySetInnerHTML={{ __html: description }} />
-        <ReadMoreLink to="/article">Read more</ReadMoreLink>
+        <ReadMoreLink to="/article" state={{ content, url, imageURL, title }}>
+          Read more
+        </ReadMoreLink>
       </CardBox>
     </CardItem>
   );
