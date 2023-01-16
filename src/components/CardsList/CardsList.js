@@ -1,5 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
-// import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import {
   selectFilterValue,
   selectNewsCards,
@@ -8,10 +7,8 @@ import {
 import { CardsList, CardListTitle } from './CardsListStyled';
 import { CardItem } from 'components/CardItem/CardItemStyled';
 import '../../index.css';
-// import { fetchCards } from '../../redux/operations';
 
 export const CardsListSection = () => {
-  //   const dispatch = useDispatch();
   const filter = useSelector(selectFilterValue);
   const cards = useSelector(selectNewsCards);
   const totalResults = useSelector(selectTotalResuts);
@@ -34,7 +31,7 @@ export const CardsListSection = () => {
             newCard.relevancy += 1;
             newCard.title = newCard.title.replace(
               `${titleWord}`,
-              `<span style={{backgroundColor:"yellow"}}>${titleWord}</span>`
+              `<span class="bgc">${titleWord}</span>`
             );
           }
         }
@@ -46,7 +43,7 @@ export const CardsListSection = () => {
             newCard.relevancy += 1;
             newCard.description = newCard.description.replace(
               `${descriptionWord}`,
-              `<span style={{backgroundColor:"yellow"}}>${descriptionWord}</span>`
+              `<span class="bgc">${descriptionWord}</span>`
             );
           }
         }
@@ -61,14 +58,6 @@ export const CardsListSection = () => {
   };
 
   const sortedCards = setSortedCards(cards, filter);
-
-  //   function createMarkup() {
-  //     return { __html: '<p>safdsgdsg</p>' };
-  //   }
-
-  //   function MyComponent() {
-  //     return <div dangerouslySetInnerHTML={createMarkup()} />;
-  //   }
 
   return (
     <>
