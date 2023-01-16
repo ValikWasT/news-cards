@@ -7,6 +7,3 @@ export const CardsList = styled.ul`
   list-style: none;
 `;
 export const CardListTitle = styled.p``;
-export const WordSpan = styled.span`
-  background-color: yellow;
-`;

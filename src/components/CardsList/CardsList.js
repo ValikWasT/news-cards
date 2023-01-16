@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
 import {
   selectFilterValue,
   selectNewsCards,
   selectTotalResuts,
 } from 'redux/selectors';
 import { CardsList, CardListTitle } from './CardsListStyled';
-import { CardItem } from 'components/CardItem/CardItemStyled';
+import { Card } from 'components/CardItem/CardItem';
 import '../../index.css';
 
 export const CardsListSection = () => {
@@ -21,6 +22,8 @@ export const CardsListSection = () => {
         title: card.title,
         description: card.description.slice(0, 100),
         url: card.url,
+        imageURL: card.urlToImage,
+        content: card.content,
         relevancy: 0,
       };
       const arrayWordsOfTitle = newCard.title.split(' ');
@@ -63,16 +66,8 @@ export const CardsListSection = () => {
     <>
       <CardListTitle>Total results: {totalResults}</CardListTitle>
       <CardsList>
-        {cards.length > 0 ? (
-          sortedCards.map(card => (
-            <CardItem key={card.title}>
-              <div dangerouslySetInnerHTML={{ __html: card.title }} />,
-              {card.description.length}
-            </CardItem>
-          ))
-        ) : (
-          <div>Error</div>
-        )}
+        {sortedCards.length > 0 &&
+          sortedCards.map(card => <Card key={nanoid()} card={card} />)}
       </CardsList>
     </>
   );

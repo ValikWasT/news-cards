@@ -1,5 +1,5 @@
-import { selectFilterValue } from 'redux/selectors';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+// import { ReactSVG } from 'react-svg';
 import { setFilterValue } from 'redux/filterSlice';
 import {
   SearchBarContainer,
@@ -11,29 +11,20 @@ import {
 import { fetchCards } from '../../redux/operations';
 export const SearchBarSection = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(selectFilterValue);
 
   const handleSubmit = evt => {
     evt.preventDefault();
+    const filter = evt.currentTarget.elements.text.value;
+    dispatch(setFilterValue(filter));
     dispatch(fetchCards(filter));
-  };
-
-  const handleSearch = evt => {
-    dispatch(setFilterValue(evt.currentTarget.value));
   };
 
   return (
     <SearchBarContainer>
       <SearchBarTitle>Filter by keywords</SearchBarTitle>
       <SearchForm onSubmit={handleSubmit}>
-        <SearchBarInput
-          type="text"
-          name="text"
-          value={filter}
-          placeholder="Enter text..."
-          onChange={handleSearch}
-        />
         <SearchButton type="submit">Search</SearchButton>
+        <SearchBarInput type="text" name="text" placeholder="Enter text..." />
       </SearchForm>
     </SearchBarContainer>
   );
