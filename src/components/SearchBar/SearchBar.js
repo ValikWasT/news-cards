@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-// import { ReactSVG } from 'react-svg';
 import { setFilterValue } from 'redux/filterSlice';
 import {
   SearchBarContainer,

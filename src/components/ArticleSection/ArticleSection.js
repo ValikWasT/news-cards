@@ -11,7 +11,6 @@ import {
 export const Article = () => {
   const content = useLocation().state;
   const backLinkHref = content.state?.from ?? '/';
-  console.log(content);
   return (
     <ArticleSection>
       <ArticleImg style={{ backgroundImage: `url(${content.imageURL})` }} />

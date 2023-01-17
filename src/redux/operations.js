@@ -13,7 +13,6 @@ export const fetchCards = createAsyncThunk(
       const response = await axios.get(
         `?q=${searchKey}&apiKey=${API_KEY}&sortBy=relevancy`
       );
-      Notiflix.Notify.success('News load seccess');
       return response.data;
     } catch (e) {
       Notiflix.Notify.console.error('Error! We cannot load news');
