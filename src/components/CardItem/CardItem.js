@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import {
   CardItem,
@@ -14,6 +15,7 @@ export const Card = ({
   card: { imageURL, title, content, url, description, publishedAt },
 }) => {
   const localDate = format(new Date(publishedAt), 'MMMM do, yyyy');
+  const location = useLocation();
 
   return (
     <CardItem>
@@ -26,7 +28,10 @@ export const Card = ({
         <CardTime>{localDate.toString()}</CardTime>
         <CardTitle dangerouslySetInnerHTML={{ __html: title }} />
         <CardText dangerouslySetInnerHTML={{ __html: description }} />
-        <ReadMoreLink to="/article" state={{ content, url, imageURL, title }}>
+        <ReadMoreLink
+          to="/article"
+          state={{ content, url, imageURL, title, from: location }}
+        >
           Read more
         </ReadMoreLink>
       </CardBox>
