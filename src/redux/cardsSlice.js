@@ -29,7 +29,11 @@ const cardsSlice = createSlice({
     setError(state, action) {
       state.error = action.payload;
     },
+    setTotalResults(state, action) {
+      state.totalResults = action.payload;
+    },
   },
+
   extraReducers: {
     [fetchCardById.pending]: handlePending,
     [fetchCardById.rejected]: handleRejected,
@@ -41,5 +45,6 @@ const cardsSlice = createSlice({
   },
 });
 
-export const { setArticles, setIsLoading, setError } = cardsSlice.actions;
+export const { setArticles, setIsLoading, setError, setTotalResults } =
+  cardsSlice.actions;
 export const cardsReducer = cardsSlice.reducer;

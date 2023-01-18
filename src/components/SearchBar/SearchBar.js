@@ -10,7 +10,12 @@ import {
 } from './SearchBarStyled';
 import { fetchCards } from '../../api/fetchCards';
 import { selectFilterValue } from 'redux/selectors';
-import { setArticles, setError, setIsLoading } from 'redux/cardsSlice';
+import {
+  setArticles,
+  setError,
+  setIsLoading,
+  setTotalResults,
+} from 'redux/cardsSlice';
 import Notiflix from 'notiflix';
 
 export const SearchBarSection = () => {
@@ -74,6 +79,7 @@ export const SearchBarSection = () => {
         return;
       }
       setSortedCards(cards, filter);
+      dispatch(setTotalResults(cards.length));
       dispatch(setIsLoading(true));
     } catch (error) {
       dispatch(setError(error));

@@ -11,7 +11,6 @@ export const CardsListSection = () => {
 
   return (
     <>
-      {console.log('alsd')}
       <CardListTitle>Results: {totalResults}</CardListTitle>
       <CardTitleBorder />
       <CardsList>
