@@ -15,9 +15,15 @@ const cardsSlice = createSlice({
   initialState: {
     totalResults: 0,
     items: [],
+    articles: [],
     itemById: null,
     isLoading: false,
     error: null,
+  },
+  reducers: {
+    setArticles(state, action) {
+      state.articles = action.payload;
+    },
   },
   extraReducers: {
     [fetchCards.pending]: handlePending,
@@ -38,4 +44,5 @@ const cardsSlice = createSlice({
   },
 });
 
+export const { setArticles } = cardsSlice.actions;
 export const cardsReducer = cardsSlice.reducer;
