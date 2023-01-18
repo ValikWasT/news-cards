@@ -51,4 +51,11 @@ export const BackLink = styled(NavLink)`
   position: absolute;
   bottom: -35px;
   left: 75px;
+  display: flex;
+  align-items: center;
+`;
+
+export const BackLinkText = styled.p`
+  margin: 0;
+  margin-left: 6px;
 `;

@@ -1,5 +1,6 @@
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { fetchCardById } from 'redux/operations';
 import { useEffect } from 'react';
 import {
@@ -10,6 +11,7 @@ import {
   ArticleText,
   ArticleTextUrl,
   BackLink,
+  BackLinkText,
 } from './ArticleSectionStyled';
 import { selectItemById } from 'redux/selectors';
 
@@ -42,7 +44,10 @@ export const Article = () => {
                 Click here and read more.
               </ArticleTextUrl>
             </ArticleText>
-            <BackLink to={backLinkHref}>Back to homepage</BackLink>
+            <BackLink to={backLinkHref}>
+              <ArrowBackIcon fontSize="small" />
+              <BackLinkText>Back to homepage</BackLinkText>
+            </BackLink>
           </ArticleContentBox>
         </>
       )}

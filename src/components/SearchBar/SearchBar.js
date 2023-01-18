@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import SearchIcon from '@mui/icons-material/Search';
 import { setFilterValue } from 'redux/filterSlice';
 import {
   SearchBarContainer,
@@ -11,6 +12,7 @@ import { fetchCards } from '../../api/fetchCards';
 import { selectFilterValue } from 'redux/selectors';
 import { setArticles, setError, setIsLoading } from 'redux/cardsSlice';
 import Notiflix from 'notiflix';
+
 export const SearchBarSection = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilterValue);
@@ -88,7 +90,9 @@ export const SearchBarSection = () => {
     <SearchBarContainer>
       <SearchBarTitle>Filter by keywords</SearchBarTitle>
       <SearchForm onSubmit={handleSubmit}>
-        <SearchButton type="submit">Search</SearchButton>
+        <SearchButton type="submit">
+          <SearchIcon viewBox="0 0 20 20" />
+        </SearchButton>
         <SearchBarInput
           type="text"
           name="text"

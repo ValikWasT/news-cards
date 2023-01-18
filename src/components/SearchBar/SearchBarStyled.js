@@ -17,6 +17,7 @@ export const SearchForm = styled.form`
   border-radius: 5px;
 `;
 export const SearchButton = styled.button`
+  width: 62px;
   background-color: #fff;
   border: 0;
 `;

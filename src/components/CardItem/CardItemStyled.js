@@ -44,6 +44,13 @@ export const CardTime = styled.p`
   color: #363636;
   opacity: 0.6;
   margin: 0;
+  display: flex;
+  align-items: center;
+`;
+
+export const CardTimeText = styled.p`
+  margin: 0;
+  margin-left: 8px;
 `;
 
 export const ReadMoreLink = styled(NavLink)`
@@ -54,4 +61,11 @@ export const ReadMoreLink = styled(NavLink)`
   line-height: 1.5;
   color: #363636;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+`;
+
+export const ReadMoreText = styled.p`
+  margin: 0;
+  margin-right: 6px;
 `;

@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import {
@@ -9,6 +11,8 @@ import {
   CardBox,
   CardTime,
   ReadMoreLink,
+  CardTimeText,
+  ReadMoreText,
 } from './CardItemStyled';
 
 export const Card = ({
@@ -25,11 +29,15 @@ export const Card = ({
         <CardImg src={'https://via.placeholder.com/400x220'} />
       )}
       <CardBox>
-        <CardTime>{localDate}</CardTime>
+        <CardTime>
+          <CalendarTodayIcon fontSize="small" />{' '}
+          <CardTimeText>{localDate}</CardTimeText>
+        </CardTime>
         <CardTitle dangerouslySetInnerHTML={{ __html: title }} />
         <CardText dangerouslySetInnerHTML={{ __html: description }} />
         <ReadMoreLink to={`/${id}`} state={{ from: location }}>
-          Read more
+          <ReadMoreText>Read more</ReadMoreText>{' '}
+          <ArrowForwardIcon fontSize="small" />
         </ReadMoreLink>
       </CardBox>
     </CardItem>
