@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
+// import { nanoid } from '@reduxjs/toolkit';
 import {
   selectFilterValue,
   selectNewsCards,
@@ -19,11 +19,11 @@ export const CardsListSection = () => {
     const arrayWordsOfFilter = filter.split(' ');
     for (const card of cards) {
       const newCard = {
+        id: card.id,
         title: card.title,
-        description: card.description.slice(0, 100),
+        description: card.summary.slice(0, 100),
         url: card.url,
-        imageURL: card.urlToImage,
-        content: card.content,
+        imageURL: card.imageUrl,
         publishedAt: card.publishedAt,
         relevancy: 0,
       };
@@ -69,7 +69,7 @@ export const CardsListSection = () => {
       <CardTitleBorder />
       <CardsList>
         {sortedCards.length > 0 &&
-          sortedCards.map(card => <Card key={nanoid()} card={card} />)}
+          sortedCards.map(card => <Card key={card.id} card={card} />)}
       </CardsList>
     </>
   );

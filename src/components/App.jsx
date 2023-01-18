@@ -6,7 +6,7 @@ export const App = () => {
   return (
     <Routes>
       <Route path='/' element={<HomePage />} />
-      <Route path='/article' element={<ArticlePage />} />
+      <Route path='/:article' element={<ArticlePage />} />
     </Routes>
   );
 };

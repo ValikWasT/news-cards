@@ -12,7 +12,7 @@ import {
 } from './CardItemStyled';
 
 export const Card = ({
-  card: { imageURL, title, content, url, description, publishedAt },
+  card: { imageURL, title, description, publishedAt, id },
 }) => {
   const localDate = format(new Date(publishedAt), 'MMMM do, yyyy');
   const location = useLocation();
@@ -25,13 +25,10 @@ export const Card = ({
         <CardImg src={'https://via.placeholder.com/400x220'} />
       )}
       <CardBox>
-        <CardTime>{localDate.toString()}</CardTime>
+        <CardTime>{localDate}</CardTime>
         <CardTitle dangerouslySetInnerHTML={{ __html: title }} />
         <CardText dangerouslySetInnerHTML={{ __html: description }} />
-        <ReadMoreLink
-          to="/article"
-          state={{ content, url, imageURL, title, from: location }}
-        >
+        <ReadMoreLink to={`/${id}`} state={{ from: location }}>
           Read more
         </ReadMoreLink>
       </CardBox>
@@ -43,7 +40,6 @@ Card.propTypes = {
   card: PropTypes.shape({
     imageURL: PropTypes.string,
     title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     publishedAt: PropTypes.string.isRequired,
