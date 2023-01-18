@@ -36,7 +36,7 @@ export const CardImg = styled.img`
   width: 400px;
   height: 220px;
 `;
-export const CardTime = styled.p`
+export const CardTime = styled.div`
   font-family: 'Montserrat';
   font-weight: 400;
   font-size: 14px;
