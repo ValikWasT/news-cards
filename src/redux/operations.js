@@ -4,19 +4,6 @@ import Notiflix from 'notiflix';
 
 axios.defaults.baseURL = 'https://api.spaceflightnewsapi.net/v3';
 
-export const fetchCards = createAsyncThunk(
-  'cards/fetchAll',
-  async (searchKey, thunkAPI) => {
-    try {
-      const response = await axios.get(`/articles?title_contains=${searchKey}`);
-      return response.data;
-    } catch (e) {
-      Notiflix.Notify.console.error('Error! We cannot load news');
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
 export const fetchCardById = createAsyncThunk(
   'cards/fetchById',
   async (searchId, thunkAPI) => {

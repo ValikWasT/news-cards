@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCards, fetchCardById } from './operations';
+import { fetchCardById } from './operations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -14,7 +14,6 @@ const cardsSlice = createSlice({
   name: 'cards',
   initialState: {
     totalResults: 0,
-    items: [],
     articles: [],
     itemById: null,
     isLoading: false,
@@ -24,18 +23,16 @@ const cardsSlice = createSlice({
     setArticles(state, action) {
       state.articles = action.payload;
     },
+    setIsLoading(state, action) {
+      state.isLoading = action.payload;
+    },
+    setError(state, action) {
+      state.error = action.payload;
+    },
   },
   extraReducers: {
-    [fetchCards.pending]: handlePending,
-    [fetchCards.rejected]: handleRejected,
     [fetchCardById.pending]: handlePending,
     [fetchCardById.rejected]: handleRejected,
-    [fetchCards.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.items = action.payload;
-      state.totalResults = action.payload.length;
-    },
     [fetchCardById.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
@@ -44,5 +41,5 @@ const cardsSlice = createSlice({
   },
 });
 
-export const { setArticles } = cardsSlice.actions;
+export const { setArticles, setIsLoading, setError } = cardsSlice.actions;
 export const cardsReducer = cardsSlice.reducer;

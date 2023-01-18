@@ -7,13 +7,13 @@ import {
   SearchButton,
   SearchBarTitle,
 } from './SearchBarStyled';
-import { fetchCards } from '../../redux/operations';
-import { selectFilterValue, selectNewsCards } from 'redux/selectors';
-import { setArticles } from 'redux/cardsSlice';
+import { fetchCards } from '../../api/fetchCards';
+import { selectFilterValue } from 'redux/selectors';
+import { setArticles, setError, setIsLoading } from 'redux/cardsSlice';
+import Notiflix from 'notiflix';
 export const SearchBarSection = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilterValue);
-  const cards = useSelector(selectNewsCards);
 
   const setSortedCards = (cards, filter) => {
     const newArrayOfCards = [];
@@ -60,12 +60,24 @@ export const SearchBarSection = () => {
       (a, b) => b.relevancy - a.relevancy
     );
     dispatch(setArticles(sortedArray));
+    Notiflix.Notify.success(`Success! '${filter}' news found`);
   };
 
-  const handleSubmit = evt => {
+  const handleSubmit = async evt => {
     evt.preventDefault();
-    dispatch(fetchCards(filter));
-    setSortedCards(cards, filter);
+    try {
+      const cards = await fetchCards(filter);
+      if (cards.length === 0) {
+        Notiflix.Notify.failure(`Error! '${filter}' news not found`);
+        return;
+      }
+      setSortedCards(cards, filter);
+      dispatch(setIsLoading(true));
+    } catch (error) {
+      dispatch(setError(error));
+    } finally {
+      dispatch(setIsLoading(false));
+    }
   };
 
   const handleSearch = e => {
