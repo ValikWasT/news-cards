@@ -22,36 +22,9 @@ export const SearchBarSection = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilterValue);
 
-  const paintSimilarWords = (wordsArray, filterArray, card, key) => {
-    for (const word of wordsArray) {
-      for (const filterWord of filterArray) {
-        if (word.toLowerCase() === filterWord.toLowerCase()) {
-          card.relevancy += 1;
-
-          if (key === 'title') {
-            card.title = card.title.replace(
-              `${word}`,
-              `<span class="bgc">${word}</span>`
-            );
-            return;
-          }
-
-          if (key === 'description') {
-            card.description = card.description.replace(
-              `${word}`,
-              `<span class="bgc">${word}</span>`
-            );
-            return;
-          }
-        }
-      }
-    }
-  };
-
   const setSortedCards = (cards, filter) => {
     const newArrayOfCards = [];
     const arrayWordsOfFilter = filter.split(' ');
-
     for (const card of cards) {
       const newCard = {
         id: card.id,
@@ -61,29 +34,54 @@ export const SearchBarSection = () => {
         imageURL: card.imageUrl,
         publishedAt: card.publishedAt,
         relevancy: 0,
+        titleRelevancy: 0,
+        descRelevancy: 0,
       };
 
       const arrayWordsOfTitle = newCard.title.split(' ');
       const arrayWordsOfDescription = newCard.description.split(' ');
 
-      paintSimilarWords(
-        arrayWordsOfTitle,
-        arrayWordsOfFilter,
-        newCard,
-        'title'
-      );
-      paintSimilarWords(
-        arrayWordsOfDescription,
-        arrayWordsOfFilter,
-        newCard,
-        'description'
-      );
+      for (const titleWord of arrayWordsOfTitle) {
+        for (const filterWord of arrayWordsOfFilter) {
+          if (titleWord.toLowerCase() === filterWord.toLowerCase()) {
+            newCard.relevancy += 1;
+            newCard.title = newCard.title.replace(
+              `${titleWord}`,
+              `<span class="bgc">${titleWord}</span>`
+            );
+          }
+        }
+      }
+
+      for (const descriptionWord of arrayWordsOfDescription) {
+        for (const filterWord of arrayWordsOfFilter) {
+          if (descriptionWord.toLowerCase() === filterWord.toLowerCase()) {
+            newCard.relevancy += 1;
+            newCard.description = newCard.description.replace(
+              `${descriptionWord}`,
+              `<span class="bgc">${descriptionWord}</span>`
+            );
+          }
+        }
+      }
 
       newArrayOfCards.push(newCard);
     }
-    const sortedArray = [...newArrayOfCards].sort(
-      (a, b) => b.relevancy - a.relevancy
-    );
+    const sortedArray = [...newArrayOfCards].sort((a, b) => {
+      const first = a.titleRelevancy + a.descRelevancy;
+      const second = b.titleRelevancy + b.descRelevancy;
+      if (first === second) {
+        if (
+          a.titleRelevancy >= b.titleRelevancy &&
+          a.titleRelevancy >= b.descRelevancy
+        ) {
+          return -1;
+        }
+        return 1;
+      }
+      return second - first;
+    });
+    console.log(sortedArray);
     dispatch(setArticles(sortedArray));
     Notiflix.Notify.success(`Success! '${filter}' news found`);
   };
