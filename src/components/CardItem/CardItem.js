@@ -35,7 +35,7 @@ export const Card = ({
         </CardTime>
         <CardTitle dangerouslySetInnerHTML={{ __html: title }} />
         <CardText dangerouslySetInnerHTML={{ __html: description }} />
-        <ReadMoreLink to={`/${id}`} state={{ from: location }}>
+        <ReadMoreLink to={`/articles/${id}`} state={{ from: location }}>
           <ReadMoreText>Read more</ReadMoreText>{' '}
           <ArrowForwardIcon fontSize="small" />
         </ReadMoreLink>

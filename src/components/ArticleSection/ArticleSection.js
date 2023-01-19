@@ -17,11 +17,11 @@ import {
 
 export const Article = () => {
   const dispatch = useDispatch();
-  const { article } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    dispatch(fetchCardById(article));
-  }, [article, dispatch]);
+    dispatch(fetchCardById(id));
+  }, [id, dispatch]);
 
   const card = useSelector(selectItemById);
 
