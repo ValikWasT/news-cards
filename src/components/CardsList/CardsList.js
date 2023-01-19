@@ -1,9 +1,8 @@
+import '../../index.css';
 import { useSelector } from 'react-redux';
-// import { nanoid } from '@reduxjs/toolkit';
 import { selectArticles, selectTotalResuts } from 'redux/selectors';
 import { CardsList, CardListTitle, CardTitleBorder } from './CardsListStyled';
 import { Card } from 'components/CardItem/CardItem';
-import '../../index.css';
 
 export const CardsListSection = () => {
   const articles = useSelector(selectArticles);

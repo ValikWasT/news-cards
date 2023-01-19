@@ -1,6 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
+import Notiflix from 'notiflix';
+import { selectFilterValue } from 'redux/selectors';
+import { fetchCards } from '../../api/fetchCards';
 import { setFilterValue } from 'redux/filterSlice';
+import {
+  setArticles,
+  setError,
+  setIsLoading,
+  setTotalResults,
+} from 'redux/cardsSlice';
 import {
   SearchBarContainer,
   SearchBarInput,
@@ -8,15 +17,6 @@ import {
   SearchButton,
   SearchBarTitle,
 } from './SearchBarStyled';
-import { fetchCards } from '../../api/fetchCards';
-import { selectFilterValue } from 'redux/selectors';
-import {
-  setArticles,
-  setError,
-  setIsLoading,
-  setTotalResults,
-} from 'redux/cardsSlice';
-import Notiflix from 'notiflix';
 
 export const SearchBarSection = () => {
   const dispatch = useDispatch();
@@ -70,8 +70,7 @@ export const SearchBarSection = () => {
     Notiflix.Notify.success(`Success! '${filter}' news found`);
   };
 
-  const handleSubmit = async evt => {
-    evt.preventDefault();
+  const onFetchCards = async () => {
     try {
       const cards = await fetchCards(filter);
       if (cards.length === 0) {
@@ -86,6 +85,11 @@ export const SearchBarSection = () => {
     } finally {
       dispatch(setIsLoading(false));
     }
+  };
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    onFetchCards();
   };
 
   const handleSearch = e => {

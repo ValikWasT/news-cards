@@ -1,8 +1,9 @@
+import { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { fetchCardById } from 'redux/operations';
-import { useEffect } from 'react';
+import { selectItemById } from 'redux/selectors';
 import {
   ArticleSection,
   ArticleImg,
@@ -13,7 +14,6 @@ import {
   BackLink,
   BackLinkText,
 } from './ArticleSectionStyled';
-import { selectItemById } from 'redux/selectors';
 
 export const Article = () => {
   const dispatch = useDispatch();
