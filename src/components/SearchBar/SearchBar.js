@@ -22,9 +22,36 @@ export const SearchBarSection = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilterValue);
 
+  const paintSimilarWords = (wordsArray, filterArray, card, key) => {
+    for (const word of wordsArray) {
+      for (const filterWord of filterArray) {
+        if (word.toLowerCase() === filterWord.toLowerCase()) {
+          card.relevancy += 1;
+
+          if (key === 'title') {
+            card.title = card.title.replace(
+              `${word}`,
+              `<span class="bgc">${word}</span>`
+            );
+            return;
+          }
+
+          if (key === 'description') {
+            card.description = card.description.replace(
+              `${word}`,
+              `<span class="bgc">${word}</span>`
+            );
+            return;
+          }
+        }
+      }
+    }
+  };
+
   const setSortedCards = (cards, filter) => {
     const newArrayOfCards = [];
     const arrayWordsOfFilter = filter.split(' ');
+
     for (const card of cards) {
       const newCard = {
         id: card.id,
@@ -35,31 +62,22 @@ export const SearchBarSection = () => {
         publishedAt: card.publishedAt,
         relevancy: 0,
       };
+
       const arrayWordsOfTitle = newCard.title.split(' ');
       const arrayWordsOfDescription = newCard.description.split(' ');
-      for (const titleWord of arrayWordsOfTitle) {
-        for (const filterWord of arrayWordsOfFilter) {
-          if (titleWord.toLowerCase() === filterWord.toLowerCase()) {
-            newCard.relevancy += 1;
-            newCard.title = newCard.title.replace(
-              `${titleWord}`,
-              `<span class="bgc">${titleWord}</span>`
-            );
-          }
-        }
-      }
 
-      for (const descriptionWord of arrayWordsOfDescription) {
-        for (const filterWord of arrayWordsOfFilter) {
-          if (descriptionWord.toLowerCase() === filterWord.toLowerCase()) {
-            newCard.relevancy += 1;
-            newCard.description = newCard.description.replace(
-              `${descriptionWord}`,
-              `<span class="bgc">${descriptionWord}</span>`
-            );
-          }
-        }
-      }
+      paintSimilarWords(
+        arrayWordsOfTitle,
+        arrayWordsOfFilter,
+        newCard,
+        'title'
+      );
+      paintSimilarWords(
+        arrayWordsOfDescription,
+        arrayWordsOfFilter,
+        newCard,
+        'description'
+      );
 
       newArrayOfCards.push(newCard);
     }
