@@ -29,7 +29,7 @@ export const SearchBarSection = () => {
       const newCard = {
         id: card.id,
         title: card.title,
-        description: card.summary.slice(0, 100),
+        description: `${card.summary.slice(0, 100)}...`,
         url: card.url,
         imageURL: card.imageUrl,
         publishedAt: card.publishedAt,
