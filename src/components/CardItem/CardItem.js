@@ -48,7 +48,7 @@ Card.propTypes = {
   card: PropTypes.shape({
     imageURL: PropTypes.string,
     title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     publishedAt: PropTypes.string.isRequired,
   }).isRequired,
