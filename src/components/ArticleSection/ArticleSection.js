@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { fetchCardById } from 'redux/operations';
-import { selectItemById } from 'redux/selectors';
+import { selectItemById, selectError } from 'redux/selectors';
 import {
   ArticleSection,
   ArticleImg,
@@ -13,23 +13,32 @@ import {
   ArticleTextUrl,
   BackLink,
   BackLinkText,
+  ErrorMessage,
+  ErrorMessageText,
+  ErrorMessageLink,
 } from './ArticleSectionStyled';
 
 export const Article = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const error = useSelector(selectError);
+  const card = useSelector(selectItemById);
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(fetchCardById(id));
   }, [id, dispatch]);
 
-  const card = useSelector(selectItemById);
-
-  const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
 
   return (
     <ArticleSection>
+      {error && (
+        <ErrorMessage>
+          <ErrorMessageText>{error}</ErrorMessageText>
+          <ErrorMessageLink to="/">Go home page</ErrorMessageLink>
+        </ErrorMessage>
+      )}
       {card && (
         <>
           <ArticleImg style={{ backgroundImage: `url(${card.imageUrl})` }} />

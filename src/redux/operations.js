@@ -11,7 +11,7 @@ export const fetchCardById = createAsyncThunk(
       const response = await axios.get(`/articles/${searchId}`);
       return response.data;
     } catch (e) {
-      Notiflix.Notify.console.error('Error! We cannot load this new');
+      Notiflix.Notify.failure(e.message);
       return thunkAPI.rejectWithValue(e.message);
     }
   }

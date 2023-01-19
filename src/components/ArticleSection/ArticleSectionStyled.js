@@ -59,3 +59,21 @@ export const BackLinkText = styled.p`
   margin: 0;
   margin-left: 6px;
 `;
+
+export const ErrorMessage = styled.div`
+  width: 100%;
+  text-align: center;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.5;
+  color: #363636;
+  text-decoration: none;
+`;
+
+export const ErrorMessageText = styled.p``;
+
+export const ErrorMessageLink = styled(NavLink)`
+  text-decoration: none;
+  color: orangered;
+`;
